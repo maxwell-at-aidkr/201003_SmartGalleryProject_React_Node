@@ -2,9 +2,7 @@
 # 200801_ShoppingMallProject_React_Node
 > JS 기반 웹풀스택 역량 확보를 위한 쇼핑몰 개인프로젝트
 
-## 기간
-
-### 20. 8. 1.(토) ~  20. 9. 5.(토)
+## 기간: 20. 8. 1.(토) ~  20. 9. 5.(토)
 
 ## 개발과정
 
@@ -15,13 +13,7 @@
 
 ## 개발환경
 
-### 기술스택
-- [React] 
-- [Redux]
-- [Node]
-- [MongoDB]
-
-### 배포환경
-- [Docker]
+- [기술스택]: React, Redux, Node, MongoDB
+- [배포환경]: Docker
 
 
