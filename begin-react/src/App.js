@@ -40,7 +40,7 @@ function App() {
   // onChange: inputs 상태 관리, inputs 기존 객체 복사 후 새로 입력된 값 추가
   const onChange = (e) => {
     const nextInputs = {
-      //TODO: 이하 username가 email은 어디에서 오는가?
+      //TODO: 이하 username와 email은 어디에서 오는가?
       username,
       email,
     };
@@ -53,7 +53,7 @@ function App() {
   const onCreate = () => {
     const user = {
       id: nextId.current,
-      // TODO: 풀어쓰면?
+      // TODO: 풀어쓰면? ...inputs 외에 inputs.username inputs.email 쓰면 왜 안될까?
       username,
       email,
     };
