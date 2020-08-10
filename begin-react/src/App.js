@@ -2,14 +2,18 @@ import React, { useState, useRef } from "react";
 import UserList from "./UserList";
 import CreateUser from "./CreateUser";
 
+/**
+ * 코드의 흐름순서
+ * 1.
+ *
+ */
+
 function App() {
   // inputs init state
   const [inputs, setInputs] = useState({
     username: "",
     email: "",
   });
-  // destructure inputs
-  const { username, email } = inputs;
 
   // users init state
   const [users, setUsers] = useState([
@@ -30,13 +34,18 @@ function App() {
     },
   ]);
 
+  // destructure inputs
+  const { username, email } = inputs;
+
   // onChange: inputs 상태 관리, inputs 기존 객체 복사 후 새로 입력된 값 추가
   const onChange = (e) => {
-    setInputs({
-      // TODO: ...inputs 풀어쓰면?
-      ...inputs,
-      [e.target.name]: e.target.value,
-    });
+    const nextInputs = {
+      //TODO: 이하 username가 email은 어디에서 오는가?
+      username,
+      email,
+    };
+    nextInputs[e.target.name] = e.target.value;
+    setInputs(nextInputs);
   };
   const nextId = useRef(4);
 
