@@ -11,14 +11,6 @@ function App() {
   // destructure inputs
   const { username, email } = inputs;
 
-  // onChange: 기존 객체 복사 후 새로 입력된 값 추가
-  const onChange = (e) => {
-    setInputs({
-      // TODO: ...inputs 풀어쓰면?
-      ...inputs,
-      [e.target.name]: e.target.value,
-    });
-  };
   // users init state
   const [users, setUsers] = useState([
     {
@@ -38,13 +30,21 @@ function App() {
     },
   ]);
 
+  // onChange: inputs 상태 관리, inputs 기존 객체 복사 후 새로 입력된 값 추가
+  const onChange = (e) => {
+    setInputs({
+      // TODO: ...inputs 풀어쓰면?
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
   const nextId = useRef(4);
-  // coCreate:
+
+  // onCreate: 입력값으로 user 객체 content 생성 후 기존 객체에 추가, input 값 설정
   const onCreate = () => {
-    // input 값으로 user 객체 content 생성
     const user = {
       id: nextId.current,
-      // TODO: 풀어써보자
+      // TODO: 풀어쓰면?
       username,
       email,
     };
@@ -57,6 +57,7 @@ function App() {
     });
     nextId.current += 1;
   };
+
   return (
     <>
       <CreateUser
