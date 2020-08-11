@@ -9,7 +9,9 @@ import CreateUser from "./CreateUser";
  *  -> 기존 inputs 복사 및 e.target.name 지정에 따른 value 수정
  * 3. onCreate 정의
  *  -> useRef 객체 생성 / use 객체 생성 / 기존 객체 복사 및 use 더하기 / setInputs 초기화
- * 4. return 정의
+ * 4. onRemove 정의
+ * 5. onToggle 정의
+ * 6. return 정의
  *  -> CreateUser 및 UserList 호출에 따른 변수 및 함수 전달
  */
 
@@ -27,16 +29,19 @@ function App() {
       id: 1,
       username: "velopert",
       email: "public.velopert@gmail.com",
+      active: true,
     },
     {
       id: 2,
       username: "tester",
       email: "tester@example.com",
+      active: true,
     },
     {
       id: 3,
       username: "liz",
       email: "liz@example.com",
+      active: false,
     },
   ]);
 
@@ -74,6 +79,13 @@ function App() {
   const onRemove = (id) => {
     setUsers(users.filter((user) => user.id !== id));
   };
+  const onToggle = (id) => {
+    setUsers(
+      users.map((user) =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  };
 
   return (
     <>
@@ -83,7 +95,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} onRemove={onRemove} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </>
   );
 }
