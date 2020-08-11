@@ -1,3 +1,71 @@
+import React, { useRef, useState } from "react";
+import CreateUser from "./CreateUser";
+import UserList from "./UserList";
+
+function ListAppend() {
+  // inputs, users init(useState 사용)
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+  });
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: "velopert",
+      email: "public.velopert@gmail.com",
+    },
+    {
+      id: 2,
+      username: "tester",
+      email: "tester@example.com",
+    },
+    {
+      id: 3,
+      username: "l",
+      email: "l.com",
+    },
+  ]);
+
+  const { username, email } = inputs;
+  // onChange 정의
+  const onChange = (e) => {
+    const nextInputs = {
+      ...inputs,
+    };
+    nextInputs[e.target.name] = e.target.value;
+    setInputs(nextInputs);
+  };
+
+  // onCreate 정의
+  const nextId = useRef(4);
+  const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      ...inputs,
+    };
+    setUsers([...users, user]);
+    setInputs({
+      username: "",
+      email: "",
+    });
+    nextId.current += 1;
+  };
+
+  // return 정의
+  return (
+    <>
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
+      <UserList users={users} />
+    </>
+  );
+}
+
+export default ListAppend;
 import React, { useState, useRef } from "react";
 import UserList from "./UserList";
 import CreateUser from "./CreateUser";
@@ -71,9 +139,6 @@ function App() {
     });
     nextId.current += 1;
   };
-  const onRemove = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
-  };
 
   return (
     <>
@@ -83,7 +148,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} onRemove={onRemove} />
+      <UserList users={users} />
     </>
   );
 }
