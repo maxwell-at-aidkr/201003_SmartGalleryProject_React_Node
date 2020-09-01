@@ -16,7 +16,8 @@
 * React, Redux
 * Node, MongoDB
 ### 배포환경
-* Docker
+* Docker, Travis
+* AWS
 
 
 
