@@ -16,8 +16,8 @@
 * React, Redux
 * Node, MongoDB
 ### 배포환경
-* Docker, Travis
-* AWS
+* Docker, Travis CI
+* AWS services(EB, S3, IAM)
 
 
 
