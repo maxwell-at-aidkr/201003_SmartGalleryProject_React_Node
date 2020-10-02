@@ -1,5 +1,5 @@
 
-# 200914_ShoppingMallProject_React_Node
+# 201003_SmartGalleryProject_React_Node
 > 웹풀스택 역량 강화를 위한 쇼핑몰 프로젝트
 
 ## 기간
