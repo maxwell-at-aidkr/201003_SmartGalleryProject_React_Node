@@ -1,9 +1,9 @@
 
 # 201003_SmartGalleryProject_React_Node
 > 웹풀스택 역량 강화를 위한 쇼핑몰 프로젝트
-* [SmartGallery 서비스 바로가기](http://movieapp-env.eba-rpkddmg5.ap-northeast-2.elasticbeanstalk.com/)
-* [프로젝트 기획안](https://www.notion.so/Movie-App-Project-a4ee1766d86f45888554e00969c1dcd3)
-* [프로젝트 일정표](https://www.notion.so/Movie-App-Project-a4ee1766d86f45888554e00969c1dcd3)
+* [SmartGallery 서비스 바로가기](#)
+* [프로젝트 기획안](https://docs.google.com/document/d/1vjMIfRRL0LA51GVTZCjFNcIqeQl6gqodsmkOK1m5A8k/edit?usp=sharing)
+* [프로젝트 일정표](https://docs.google.com/spreadsheets/d/1_Wt4_X0bFx_EWs96XNJ3gPiMe3q-OPMoWkDOoAI3P_M/edit?usp=sharing)
 
 ## 기간
 * '20. 10. 3.(토) ~ '20. 10.31.(
