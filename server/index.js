@@ -21,6 +21,8 @@ app.get('/', function (req, res) {
   res.status(200).send('good');
 });
 
+app.use('/api/video', require('./routes/video'));
+
 // 5000포트 사용하여 app 시작
 app.listen(5000, () => {
   console.log('app start at 5000 port');
