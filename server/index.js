@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
   res.status(200).send('good');
 });
 
-app.use('/api/video', require('./routes/video'));
+app.use('/api/work', require('./routes/work'));
 
 // 5000포트 사용하여 app 시작
 app.listen(5000, () => {
