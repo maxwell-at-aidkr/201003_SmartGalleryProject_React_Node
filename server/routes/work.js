@@ -1,7 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const upload = multer({ storage: 'uploads/' });
 
 const { Work } = require('../models/Work');
+
+router.post('/uploadfiles', upload.single('img'), (req, res) => {
+  res.json(req.file);
+  console.log(req.file);
+});
 
 router.get('/getWorks', (req, res) => {
   Work.find().exec((err, works) => {
