@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const workSchema = mongoose.Schema(
   {
     writer: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+      // type: Schema.Types.ObjectId,
+      // ref: 'User',
+      type: String,
     },
     title: {
       type: String,
@@ -17,20 +18,20 @@ const workSchema = mongoose.Schema(
     privacy: {
       type: Number,
     },
-    filePath: {
-      type: String,
-    },
-    catogory: String,
-    views: {
-      type: Number,
-      default: 0,
-    },
-    duration: {
-      type: String,
-    },
-    thumbnail: {
-      type: String,
-    },
+    // filePath: {
+    //   type: String,
+    // },
+    // catogory: String,
+    // views: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // duration: {
+    //   type: String,
+    // },
+    // thumbnail: {
+    //   type: String,
+    // },
   },
   { timestamps: true }
 );
