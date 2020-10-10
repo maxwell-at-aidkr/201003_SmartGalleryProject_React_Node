@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-// const bcrypt = require("bcryptjs");
-// const saltRounds = 10;
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 // const jwt = require("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
@@ -38,6 +38,26 @@ const userSchema = mongoose.Schema({
   tokenExp: {
     type: Number,
   },
+});
+
+// pre 메소드 활용하여 DB save 전에 아래 로직 실행
+userSchema.pre('save', function (next) {
+  let user = this;
+  // user 스키마 내  password filed의 생성, 수정 시에만 아래 로직 실행
+  if (user.isModified('password')) {
+    // plain password를 해쉬처리하고 salt를 섞어서 user.password에 저장
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      if (err) return next(err);
+      bcrypt.hash(user.password, salt, function (err, hash) {
+        if (err) return next(err);
+        user.password = hash;
+        // save 메소드로 이동(next())
+        next();
+      });
+    });
+  } else {
+    next();
+  }
 });
 
 const User = mongoose.model('User', userSchema);
