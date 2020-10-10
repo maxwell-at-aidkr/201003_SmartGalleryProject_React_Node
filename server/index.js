@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { User } = require('./models/User');
 
 const mongoose = require('mongoose');
 const connect = mongoose
@@ -19,6 +20,14 @@ app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
   res.status(200).send('good');
+});
+
+app.post('/api/users/register', (req, res) => {
+  const user = new User(req.body);
+  user.save((err, userInfo) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({ success: true });
+  });
 });
 
 app.use('/api/work', require('./routes/work'));
