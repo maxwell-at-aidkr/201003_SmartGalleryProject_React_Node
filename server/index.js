@@ -64,6 +64,7 @@ app.post('/api/users/login', (req, res) => {
 });
 
 // auth(middleware)
+// TODO: auth 정의에서는 매개변수를 세 개 사용했는데??
 app.get('/api/users/auth', auth, (req, res) => {
   // auth에서 인증로직 통과 후 다음의 코드 실행
   res.status(200).json({
@@ -85,14 +86,9 @@ app.get('/api/users/logout', auth, (req, res) => {
   });
 });
 
-const port = 5000;
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
-
 app.use('/api/work', require('./routes/work'));
 
-// 5000포트 사용하여 app 시작
-app.listen(5000, () => {
-  console.log('app start at 5000 port');
+const port = 5000;
+app.listen(port, () => {
+  console.log('app start');
 });
