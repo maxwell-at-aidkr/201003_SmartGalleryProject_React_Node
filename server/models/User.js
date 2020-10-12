@@ -61,6 +61,7 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.methods.comparePassword = function (plainPassword, callback) {
+  // 사용자에 의해 입력된 비밀번호와 DB 내 비밀번호 간 비교
   bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
     if (err) return callback(err);
     callback(null, isMatch);
@@ -69,6 +70,7 @@ userSchema.methods.comparePassword = function (plainPassword, callback) {
 
 userSchema.methods.generateToken = function (callback) {
   let user = this;
+  // jsonwebtoken 활용하여 signed token 생성
   let token = jwt.sign(user._id.toHexString(), 'secretToken');
   user.token = token;
   user.save(function (err, user) {
