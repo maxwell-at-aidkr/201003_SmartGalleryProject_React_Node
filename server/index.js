@@ -53,7 +53,7 @@ app.post('/api/users/login', (req, res) => {
         // 쿠키에 token 저장
         return (
           res
-            // TODO: x_auth ??
+            // client browser 쿠기에 token 저장
             .cookie('x_auth', userInfo.token)
             .status(200)
             .json({ loginSuccess: true, userId: userInfo._id, userToken: userInfo.token })
@@ -61,6 +61,33 @@ app.post('/api/users/login', (req, res) => {
       });
     });
   });
+});
+
+// auth(middleware)
+app.get('/api/users/auth', auth, (req, res) => {
+  // auth에서 인증로직 통과 후 다음의 코드 실행
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    role: req.user.role,
+    image: req.user.image,
+  });
+});
+
+app.get('/api/users/logout', auth, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).send({ success: true });
+  });
+});
+
+const port = 5000;
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
 });
 
 app.use('/api/work', require('./routes/work'));
