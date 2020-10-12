@@ -31,13 +31,27 @@ app.post('/api/users/register', (req, res) => {
 });
 
 app.post('/api/users/login', (req, res) => {
-  User.findOne({ email: req.body.email }, (err, user) => {
-    if (!user) return res.json({ loginSuccess: false, message: '해당하는 이메일이 없습니다' });
-    user.comparePassword(req.body.password, (err, isMatch) => {
-      if (!isMatch) return res.json({ loginSuccess: false, message: '비밀번호가 틀렸습니다' });
-      user.generateToken((err, user) => {
+  // 1. 요청된 이메일 주소를 DB에서 검색(User schema 내 이메일 중 요청 이메일 주소 검색)
+  User.findOne({ email: req.body.email }, (err, userInfo) => {
+    // 요청한 이메일 주소가 없다면
+    if (!userInfo) {
+      return res.json({
+        loginSuccess: false,
+        message: '해당하는 이메일이 없습니다.',
+      });
+    }
+    // 2. 요청한 이메일과 일치하는 user가 DB 내 있다면, user 비밀번호 일치여부 확인
+    userInfo.comparePassword(req.body.password, (err, isMatch) => {
+      if (!isMatch)
+        return res.json({
+          loginSueccess: false,
+          message: '비밀번호가 틀렸습니다.',
+        });
+      // 3. 비밀번호 일치 시 토큰 생성
+      userInfo.generateToken((err, userInfo) => {
         if (err) return res.status(400).send(err);
-        return res.cookie('x_auth', user.token).status(200).json({ loginSuccess: true, userId: user._id });
+        // 쿠키에 token 저장
+        return res.cookie('x_auth', userInfo.token).status(200).json({ loginSuccess: true, userId: userInfo._id });
       });
     });
   });
