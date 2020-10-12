@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const { User } = require('./models/User');
+const { auth } = require('./middleware/auth');
 
 const mongoose = require('mongoose');
 const connect = mongoose
@@ -17,6 +19,8 @@ const connect = mongoose
 const app = express();
 // json 형태 요청에 대해 파싱 가능
 app.use(bodyParser.json());
+
+app.use(cookieParser());
 
 app.get('/', function (req, res) {
   res.status(200).send('good');
