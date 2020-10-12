@@ -84,6 +84,7 @@ app.get('/api/users/auth', auth, (req, res) => {
 });
 
 app.get('/api/users/logout', auth, (req, res) => {
+  // 로그아웃 해당 유저를 DB에서 검색 및 DB 내 해당 유저 token 공백 처리
   User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).send({ success: true });
