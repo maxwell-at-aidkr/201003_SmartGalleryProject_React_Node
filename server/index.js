@@ -51,7 +51,13 @@ app.post('/api/users/login', (req, res) => {
       userInfo.generateToken((err, userInfo) => {
         if (err) return res.status(400).send(err);
         // 쿠키에 token 저장
-        return res.cookie('x_auth', userInfo.token).status(200).json({ loginSuccess: true, userId: userInfo._id });
+        return (
+          res
+            // TODO: x_auth ??
+            .cookie('x_auth', userInfo.token)
+            .status(200)
+            .json({ loginSuccess: true, userId: userInfo._id, userToken: userInfo.token })
+        );
       });
     });
   });
