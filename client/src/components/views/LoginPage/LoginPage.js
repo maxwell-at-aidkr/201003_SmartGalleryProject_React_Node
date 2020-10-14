@@ -17,7 +17,7 @@ function LoginPage(props) {
   };
 
   const onSubmitHandler = (event) => {
-    // submit의 default 기능(default로 설정된 action)을 제거해야 이하 로직을 실행시킬 수 있음
+    // submit의 default로 설정된 action을 제거해야 이하 로직을 실행시킬 수 있음
     event.preventDefault();
     let body = {
       email: Email,
@@ -30,11 +30,9 @@ function LoginPage(props) {
       if (response.payload.loginSuccess) {
         props.history.push("/");
       } else {
-        alert("Error");
+        alert("failed to login");
       }
     });
-    // Redux 활용에 따라 아래 request 코드를 user_actions.js로 이동
-    // Axios.post("/api/users/login", body).then((response) => {});
   };
 
   return (
