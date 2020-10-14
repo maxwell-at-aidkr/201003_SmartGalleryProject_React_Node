@@ -1,10 +1,12 @@
 import React from 'react';
-import LandingPage from './components/views/LandingPage/LandingPage'
+import LandingPage from "./components/views/LandingPage/LandingPage.js";
+import LoginPage from "./components/views/LoginPage/LoginPage.js";
+import RegisterPage from "./components/views/RegisterPage/RegisterPage.js";
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 function App() {
@@ -19,13 +21,9 @@ function App() {
           of them to render at a time
         */}
         <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route path="/about">
-          </Route>
-          <Route path="/dashboard">
-          </Route>
+        <Route exact path="/" component={LandingPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
         </Switch>
       </div>
     </Router>
