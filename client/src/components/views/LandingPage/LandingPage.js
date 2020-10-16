@@ -6,7 +6,7 @@ function LandingPage(props) {
   useEffect(() => {}, []);
 
   const onClickHandler = () => {
-    axios.get("/api/users/logout").then((response) => {
+    axios.get("/api/user/logout").then((response) => {
       if (response.data.success) {
         props.history.push("/login");
       } else {
