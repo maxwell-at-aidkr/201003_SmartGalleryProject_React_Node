@@ -18,9 +18,9 @@ const workSchema = mongoose.Schema(
     privacy: {
       type: Number,
     },
-    // filePath: {
-    //   type: String,
-    // },
+    filePath: {
+      type: String,
+    },
     // catogory: String,
     // views: {
     //   type: Number,

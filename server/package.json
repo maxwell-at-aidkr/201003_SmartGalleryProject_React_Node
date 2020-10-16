@@ -7,7 +7,7 @@
     "start": "node index.js",
     "nodemon": "nodemon index.js",
     "frontend": "npm run start --prefix ../client",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix ./../client\""
+    "dev": "concurrently \"npm run nodemon\" \"npm run start --prefix ./../client\""
   },
   "dependencies": {
     "bcrypt": "^3.0.8",
