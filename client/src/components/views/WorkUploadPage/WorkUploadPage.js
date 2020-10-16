@@ -68,7 +68,6 @@ function WorkUploadPage(props) {
     axios.post("/api/work/uploadfiles", formData, config).then((response) => {
       if (response.data.success) {
         setFilePath(response.data.filePath);
-        alert("success to save the work in server");
       } else {
         alert("failed to save the work in server");
       }

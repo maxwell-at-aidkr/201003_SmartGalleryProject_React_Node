@@ -13,8 +13,8 @@ var storage = multer.diskStorage({
   },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    if (ext !== '.mp4') {
-      return cb(res.status(400).end('only jpg, png, mp4 is allowed'), false);
+    if (ext !== '.png' || ext !== '.jpg') {
+      return cb(res.status(400).end('only jpg, png are allowed'), false);
     }
     cb(null, true);
   },
@@ -29,6 +29,7 @@ router.post('/uploadfiles', (req, res) => {
     }
     return res.json({
       success: true,
+      filePath: res.req.file.path,
     });
   });
 });
