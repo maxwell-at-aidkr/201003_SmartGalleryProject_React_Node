@@ -49,7 +49,7 @@ function WorkUploadPage(props) {
 
     axios.post("/api/work/uploadWork", variables).then((response) => {
       if (response.data.success) {
-        alert("video Uploaded Successfully");
+        alert("The Work Uploaded Successfully");
         props.history.push("/");
       } else {
         alert("Failed to upload video");
