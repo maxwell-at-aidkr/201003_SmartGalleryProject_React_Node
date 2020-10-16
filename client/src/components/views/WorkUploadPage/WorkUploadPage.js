@@ -3,6 +3,8 @@ import { Typography, Button, Form, Input } from "antd";
 import Icon from "@ant-design/icons";
 import Dropzone from "react-dropzone";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -12,12 +14,13 @@ const Private = [
   { value: 1, label: "Public" },
 ];
 
-function WorkUploadPage() {
+function WorkUploadPage(props) {
+  const user = useSelector((state) => state.user);
+
   const [title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [privacy, setPrivacy] = useState(0);
   const [FilePath, setFilePath] = useState("");
-  const [Duration, setDuration] = useState("");
 
   const handleChangeTitle = (event) => {
     setTitle(event.currentTarget.value);
@@ -28,8 +31,30 @@ function WorkUploadPage() {
   const handleChangeOne = (event) => {
     setPrivacy(event.currentTarget.value);
   };
+
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if (title === "" || Description === "" || FilePath === "") {
+      return alert("Please first fill all the fields");
+    }
+
+    const variables = {
+      writer: user.userData._id,
+      title: title,
+      description: Description,
+      privacy: privacy,
+      filePath: FilePath,
+    };
+
+    axios.post("/api/work/uploadWork", variables).then((response) => {
+      if (response.data.success) {
+        alert("video Uploaded Successfully");
+        props.history.push("/");
+      } else {
+        alert("Failed to upload video");
+      }
+    });
   };
 
   const onDrop = (files) => {
@@ -42,6 +67,7 @@ function WorkUploadPage() {
 
     axios.post("/api/work/uploadfiles", formData, config).then((response) => {
       if (response.data.success) {
+        setFilePath(response.data.filePath);
         alert("success to save the work in server");
       } else {
         alert("failed to save the work in server");
@@ -105,4 +131,4 @@ function WorkUploadPage() {
   );
 }
 
-export default WorkUploadPage;
+export default withRouter(WorkUploadPage);
