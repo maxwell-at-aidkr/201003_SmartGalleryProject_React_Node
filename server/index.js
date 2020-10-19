@@ -24,7 +24,10 @@ app.get('/', function (req, res) {
   res.status(200).send('good');
 });
 
+// 노드 서버 내 이미지 경로에 대해 클라이언트에서 접근
+// https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client
 app.use('/uploads', express.static('uploads'));
+
 app.use('/api/user', require('./routes/user'));
 app.use('/api/work', require('./routes/work'));
 
