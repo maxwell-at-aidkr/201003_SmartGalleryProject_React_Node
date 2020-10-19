@@ -29,7 +29,7 @@ router.post('/uploadfiles', (req, res) => {
     }
     console.log(res.req.file);
     let imageFilePath = '';
-    imageFilePath = 'uploads/test/' + res.req.file.originalname;
+    imageFilePath = '/uploads/test/' + res.req.file.originalname;
     return res.json({
       success: true,
       filePath: imageFilePath,

@@ -24,6 +24,7 @@ app.get('/', function (req, res) {
   res.status(200).send('good');
 });
 
+app.use('/uploads', express.static('uploads'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/work', require('./routes/work'));
 
