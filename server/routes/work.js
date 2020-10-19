@@ -9,7 +9,7 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/test');
   },
   filename: (req, file, cb) => {
-    cb(null, `${file.originalname}`);
+    cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);
@@ -27,12 +27,13 @@ router.post('/uploadfiles', (req, res) => {
     if (err) {
       return res.json({ success: false, err });
     }
-    console.log(res.req.file);
     let imageFilePath = '';
-    imageFilePath = '/uploads/test/' + res.req.file.originalname;
+    console.log(res.req.file);
+    imageFilePath = 'uploads/test/' + res.req.file.filename;
     return res.json({
       success: true,
       filePath: imageFilePath,
+      fileName: res.req.file.filename,
     });
   });
 });
