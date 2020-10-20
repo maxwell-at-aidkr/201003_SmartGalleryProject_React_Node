@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const { Work } = require('../models/Work');
 const multer = require('multer');
 
-const { Work } = require('../models/Work');
+//=================================
+//             Work
+//=================================
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -13,8 +16,8 @@ var storage = multer.diskStorage({
   },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    if (ext !== '.png' || ext !== '.jpg') {
-      return cb(res.status(400).end('only jpg, png are allowed'), false);
+    if (ext !== '.mp4') {
+      return cb(res.status(400).end('only jpg, png, mp4 is allowed'), false);
     }
     cb(null, true);
   },
@@ -22,17 +25,14 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).single('file');
 
-router.post('/uploadfiles', (req, res) => {
+router.post('/image', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
       return res.json({ success: false, err });
     }
-    let imageFilePath = '';
-    console.log(res.req.file);
-    imageFilePath = 'uploads/test/' + res.req.file.filename;
     return res.json({
       success: true,
-      filePath: imageFilePath,
+      filePath: res.req.file.path,
       fileName: res.req.file.filename,
     });
   });
@@ -41,11 +41,13 @@ router.post('/uploadfiles', (req, res) => {
 router.post('/uploadWork', (req, res) => {
   const work = new Work(req.body);
 
-  work.save((err, work) => {
+  work.save((err) => {
     if (err) return res.status(400).json({ success: false, err });
     return res.status(200).json({ success: true });
   });
 });
+
+module.exports = router;
 
 router.get('/getWorks', (req, res) => {
   Work.find().exec((err, works) => {

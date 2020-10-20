@@ -1,10 +1,16 @@
 const express = require('express');
+const app = express();
+const path = require('path');
+const cors = require('cors');
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
+const config = require('./config/key');
+
 const mongoose = require('mongoose');
 const connect = mongoose
-  .connect('mongodb+srv://manjin:abcd1234@boilerplate.dq0kk.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+  .connect(config.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -13,25 +19,37 @@ const connect = mongoose
   .then(() => console.log('MongoDB Connected...'))
   .catch((err) => console.log(err));
 
-// express server 생성
-const app = express();
-// json 형태 요청에 대해 파싱 가능
-app.use(bodyParser.json());
+app.use(cors());
 
+//to not get any deprecation warning or error
+//support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
+//to get json data
+// support parsing of application/json type post data
+app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.get('/', function (req, res) {
-  res.status(200).send('good');
-});
-
-// 노드 서버 내 이미지 경로에 대해 클라이언트에서 접근
+// 노드 서버 내 정적 파일에 대한 라우트 설정
 // https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client
 app.use('/uploads', express.static('uploads'));
 
-app.use('/api/user', require('./routes/user'));
-app.use('/api/work', require('./routes/work'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/works', require('./routes/works'));
 
-const port = 5000;
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  // All the javascript and css files will be read and served from this folder
+  app.use(express.static('client/build'));
+
+  // index.html for all page routes    html or routing and naviagtion
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
+  });
+}
+
+const port = process.env.PORT || 5000;
+
 app.listen(port, () => {
-  console.log('app start');
+  console.log(`Server Listening on ${port}`);
 });

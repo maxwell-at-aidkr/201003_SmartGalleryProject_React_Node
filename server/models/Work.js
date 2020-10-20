@@ -6,6 +6,8 @@ const workSchema = mongoose.Schema(
     writer: {
       type: Schema.Types.ObjectId,
       ref: 'User',
+    },
+    author: {
       type: String,
     },
     title: {
@@ -15,11 +17,14 @@ const workSchema = mongoose.Schema(
     description: {
       type: String,
     },
-    privacy: {
-      type: Number,
+    images: {
+      type: Array,
+      default: [],
     },
-    filePath: {
-      type: String,
+    sold: {
+      type: Number,
+      maxlength: 100,
+      default: 0,
     },
     views: {
       type: Number,
