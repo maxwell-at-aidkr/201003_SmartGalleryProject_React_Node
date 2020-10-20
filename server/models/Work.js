@@ -17,7 +17,11 @@ const workSchema = mongoose.Schema(
     description: {
       type: String,
     },
-    images: {
+    WorkImages: {
+      type: Array,
+      default: [],
+    },
+    AuthorImage: {
       type: Array,
       default: [],
     },

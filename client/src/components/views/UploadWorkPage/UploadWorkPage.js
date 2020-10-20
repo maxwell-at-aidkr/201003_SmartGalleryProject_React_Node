@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Button, Form, message, Input, Select } from "antd";
-import FileUpload from "./../../utils/FileUpload";
+import FileUpload from "../../utils/FileUpload";
 import axios from "axios";
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -10,7 +10,8 @@ function UploadWorkPage(props) {
   const [Description, setDescription] = useState("");
   const [Price, setPrice] = useState(0);
   const [Genre, setGenre] = useState(1);
-  const [Images, setImages] = useState([]);
+  const [WorkImages, setWorkImages] = useState([]);
+  const [AuthorImage, setAuthorImage] = useState();
 
   const Genres = [
     { key: 1, value: "Photo" },
@@ -31,14 +32,17 @@ function UploadWorkPage(props) {
     setGenre(event.currentTarget.value);
   };
 
-  const updateImages = (newImages) => {
-    setImages(newImages);
+  const updateWorkImages = (newWorkImages) => {
+    setWorkImages(newWorkImages);
+  };
+  const updateAuthorImage = (newAuthorImage) => {
+    setAuthorImage(newAuthorImage);
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
 
-    if (!WorkTitle || !Description || !Price || !Genre || !Images) {
+    if (!WorkTitle || !Description || !Price || !Genre || !WorkImages) {
       return alert("모든 값을 입력하세요");
     }
 
@@ -47,7 +51,8 @@ function UploadWorkPage(props) {
       title: WorkTitle,
       description: Description,
       price: Price,
-      images: Images,
+      WorkImages: WorkImages,
+      AuthorImage: AuthorImage,
       genre: Genre,
     };
 
@@ -68,7 +73,12 @@ function UploadWorkPage(props) {
         <Title level={2}> 작품 업로드 </Title>
       </div>
       <Form>
-        <FileUpload refreshFunction={updateImages} />
+        <label>작품 이미지</label>
+        <FileUpload refreshFunction={updateWorkImages} />
+        <br />
+        <br />
+        <label>작가 프로필</label>
+        <FileUpload refreshFunction={updateAuthorImage} />
         <br />
         <br />
         <label>이름</label>
