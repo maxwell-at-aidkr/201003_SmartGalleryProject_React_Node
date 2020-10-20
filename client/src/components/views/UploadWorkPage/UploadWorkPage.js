@@ -6,6 +6,7 @@ const { Title } = Typography;
 const { TextArea } = Input;
 
 function UploadWorkPage(props) {
+  const [Author, setAuthor] = useState("");
   const [WorkTitle, setWorkTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [Price, setPrice] = useState(0);
@@ -19,6 +20,9 @@ function UploadWorkPage(props) {
     { key: 3, value: "Contemporary Art" },
   ];
 
+  const handleChangeAuthor = (event) => {
+    setAuthor(event.currentTarget.value);
+  };
   const handleChangeWorkTitle = (event) => {
     setWorkTitle(event.currentTarget.value);
   };
@@ -48,6 +52,7 @@ function UploadWorkPage(props) {
 
     const body = {
       writer: props.user.userData._id,
+      author: Author,
       title: WorkTitle,
       description: Description,
       price: Price,
@@ -73,19 +78,23 @@ function UploadWorkPage(props) {
         <Title level={2}> 작품 업로드 </Title>
       </div>
       <Form>
+        <label>작가 이미지</label>
+        <FileUpload refreshFunction={updateAuthorImage} />
+        <br />
+        <br />
         <label>작품 이미지</label>
         <FileUpload refreshFunction={updateWorkImages} />
         <br />
         <br />
-        <label>작가 프로필</label>
-        <FileUpload refreshFunction={updateAuthorImage} />
+        <label>작가 이름</label>
+        <Input onChange={handleChangeAuthor} value={Author} />
         <br />
         <br />
-        <label>이름</label>
+        <label>작품 이름</label>
         <Input onChange={handleChangeWorkTitle} value={WorkTitle} />
         <br />
         <br />
-        <label>설명</label>
+        <label>작품 설명</label>
         <TextArea onChange={handleChangeDecsription} value={Description} />
         <br />
         <br />
