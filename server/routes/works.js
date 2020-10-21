@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Work } = require('../models/Work');
+const { GalleryWork } = require('../models/GalleryWork');
 const multer = require('multer');
 
 //=================================
@@ -39,7 +39,7 @@ router.post('/image', (req, res) => {
 });
 
 router.post('/uploadWork', (req, res) => {
-  const work = new Work(req.body);
+  const work = new GalleryWork(req.body);
 
   work.save((err) => {
     if (err) return res.status(400).json({ success: false, err });
@@ -50,9 +50,9 @@ router.post('/uploadWork', (req, res) => {
 module.exports = router;
 
 router.get('/getWorks', (req, res) => {
-  Work.find().exec((err, works) => {
+  GalleryWork.find().exec((err, workInfo) => {
     if (err) return res.status(400).send(err);
-    res.status(200).json({ success: true, works });
+    res.status(200).json({ success: true, workInfo });
   });
 });
 

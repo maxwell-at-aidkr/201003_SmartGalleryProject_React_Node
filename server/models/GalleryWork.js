@@ -51,6 +51,6 @@ const workSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const Work = mongoose.model('Work', workSchema);
+const GalleryWork = mongoose.model('GalleryWork', workSchema);
 
-module.exports = { Work };
+module.exports = { GalleryWork };

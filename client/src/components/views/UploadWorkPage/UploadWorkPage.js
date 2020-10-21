@@ -12,7 +12,7 @@ function UploadWorkPage(props) {
   const [Price, setPrice] = useState(0);
   const [Genre, setGenre] = useState(1);
   const [WorkImages, setWorkImages] = useState([]);
-  const [AuthorImage, setAuthorImage] = useState();
+  const [AuthorImage, setAuthorImage] = useState([]);
 
   const Genres = [
     { key: 1, value: "Photo" },
