@@ -49,7 +49,7 @@ router.post('/uploadWork', (req, res) => {
 
 module.exports = router;
 
-router.get('/getWorks', (req, res) => {
+router.post('/getWorks', (req, res) => {
   GalleryWork.find().exec((err, workInfo) => {
     if (err) return res.status(400).send(err);
     res.status(200).json({ success: true, workInfo });
