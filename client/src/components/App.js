@@ -8,6 +8,7 @@ import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import UploadWorkPage from "./views/UploadWorkPage/UploadWorkPage";
+import DetailWorkPage from "./views/DetailWorkPage/DetailWorkPage";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -26,6 +27,11 @@ function App() {
             exact
             path="/work/upload"
             component={Auth(UploadWorkPage, true)}
+          />
+          <Route
+            exact
+            path="/work/:workId"
+            component={Auth(DetailWorkPage, null)}
           />
         </Switch>
       </div>

@@ -56,4 +56,16 @@ router.post('/getWorks', (req, res) => {
   });
 });
 
+router.get('/work_by_id', (req, res) => {
+  let workId = req.query.id;
+  let workType = req.query.type;
+
+  GalleryWork.find({ _id: workId })
+    .populate('writer')
+    .exec((err, workDetailInfo) => {
+      if (err) return res.status(400).json({ success: false });
+      res.status(200).json({ success: true, workDetailInfo });
+    });
+});
+
 module.exports = router;

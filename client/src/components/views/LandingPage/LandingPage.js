@@ -9,9 +9,8 @@ function LandingPage() {
   useEffect(() => {
     axios.post("/api/works/getWorks").then((response) => {
       if (response.data.success) {
-        console.log(response.data);
+        console.log("getWorks API", response.data);
         setWorks(response.data.workInfo);
-        alert("모든 작품 정보를 가져오는데 성공했습니다");
       } else {
         alert("모든 작품 정보를 가져오는데 실패했습니다");
       }
@@ -19,16 +18,18 @@ function LandingPage() {
   }, []);
 
   const renderCard = Works.map((work, index) => {
-    console.log("work", work);
+    console.log(`work ${index}`, work);
     return (
       <Col lg={6} md={8} xs={24} key={index}>
         <Card
           key={index}
           cover={
-            <img
-              style={{ width: "100%", maxHeight: "150px" }}
-              src={`http://localhost:5000/${work.WorkImages[0]}`}
-            />
+            <a href={`/work/${work._id}`}>
+              <img
+                style={{ width: "100%", maxHeight: "150px" }}
+                src={`http://localhost:5000/${work.WorkImages[0]}`}
+              />
+            </a>
           }
         >
           <Meta title={work.title} description={`$${work.price}`} />
