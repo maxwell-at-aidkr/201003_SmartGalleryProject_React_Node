@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Col, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
+import { Typography } from "antd";
+const { Title } = Typography;
 
 function LandingPage() {
   const [Works, setWorks] = useState([]);
@@ -41,7 +43,8 @@ function LandingPage() {
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
-        <h2>Work List</h2>
+        <Title level={2}>작품 목록</Title>
+        <br />
       </div>
       {/* Filter */}
       {/* Search */}

@@ -1,0 +1,29 @@
+version: "3"
+services:
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    container_name: smart_gallery_client
+    volumes:
+      - /smart_gallery/node_modules
+      - ./client:/smart_gallery
+    stdin_open: true
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    container_name: smart_gallery_nginx
+    ports:
+      - "3000:80"
+
+  server:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    container_name: smart_gallery_server
+    volumes:
+      - /smart_gallery/node_modules
+      - ./server:/smart_gallery
