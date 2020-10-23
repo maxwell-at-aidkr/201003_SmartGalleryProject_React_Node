@@ -7,35 +7,29 @@ const multer = require('multer');
 //             Work
 //=================================
 
-var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+let storage = multer.diskStorage({
+  destination: function (req, file, cb) {
     cb(null, 'uploads/');
   },
-  filename: (req, file, cb) => {
+  filename: function (req, file, cb) {
     cb(null, `${Date.now()}_${file.originalname}`);
-  },
-  fileFilter: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    if (ext !== '.mp4') {
-      return cb(res.status(400).end('only jpg, png, mp4 is allowed'), false);
-    }
-    cb(null, true);
   },
 });
 
-var upload = multer({ storage: storage }).single('file');
+let upload = multer({ storage: storage });
 
-router.post('/image', (req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      return res.json({ success: false, err });
-    }
-    return res.json({
-      success: true,
-      filePath: res.req.file.path,
-      fileName: res.req.file.filename,
-    });
-  });
+router.post('/image', upload.single('file'), function (req, res, next) {
+  let file = req.file;
+
+  console.log('file', file);
+
+  let result = {
+    success: true,
+    filePath: file.path,
+    fileName: file.filename,
+  };
+
+  res.json(result);
 });
 
 router.post('/uploadWork', (req, res) => {
