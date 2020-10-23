@@ -29,7 +29,7 @@ function LandingPage() {
             <a href={`/work/${work._id}`}>
               <img
                 style={{ width: "100%", maxHeight: "150px" }}
-                src={`http://localhost:5000/${work.WorkImages[0]}`}
+                src={work.WorkImages[0]}
               />
             </a>
           }

@@ -11,6 +11,7 @@ AWS.config.loadFromPath(__dirname + '/../config/awsconfig.json');
 //             Work
 //=================================
 
+// 로컬 서버 스토리지에 이미지 파일 저장 로직(multer 모듈 활용)
 // let storage = multer.diskStorage({
 //   destination: function (req, file, cb) {
 //     cb(null, 'uploads/');
@@ -19,9 +20,9 @@ AWS.config.loadFromPath(__dirname + '/../config/awsconfig.json');
 //     cb(null, `${Date.now()}_${file.originalname}`);
 //   },
 // });
-
 // let upload = multer({ storage: storage });
 
+// AWS S3에 이미지 파일 저장하는 로직(multer-s3 활용)
 let s3 = new AWS.S3();
 
 let upload = multer({
@@ -29,8 +30,7 @@ let upload = multer({
     s3: s3,
     bucket: 'smartgallerystorage',
     key: function (req, file, cb) {
-      let extension = path.extname(file.originalname);
-      cb(null, Date.now().toString() + extension);
+      cb(null, `${Date.now()}_${file.originalname}`);
     },
     acl: 'public-read-write',
   }),
@@ -38,13 +38,12 @@ let upload = multer({
 
 router.post('/image', upload.single('file'), function (req, res, next) {
   let file = req.file;
-
-  console.log('file', file);
+  let AWSfilePath = `https://smartgallerystorage.s3.ap-northeast-2.amazonaws.com/${file.key}`;
 
   let result = {
     success: true,
-    filePath: file.path,
-    fileName: file.filename,
+    filePath: AWSfilePath,
+    fileName: file.key,
   };
 
   res.json(result);

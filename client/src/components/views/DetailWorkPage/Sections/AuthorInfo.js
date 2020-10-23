@@ -25,7 +25,7 @@ function AuthorInfo(props) {
             maxHeight: "500px",
             padding: "0 5% 0 0 ",
           }}
-          src={`http://localhost:5000/${AuthorImage}`}
+          src={AuthorImage}
         />
         <Title level={4}>작가: {props.detail.author}</Title>
       </div>

@@ -9,8 +9,8 @@ function WorkImage(props) {
     if (props.detail.WorkImages && props.detail.WorkImages.length > 0) {
       props.detail.WorkImages.map((image) => {
         images.push({
-          original: `http://localhost:5000/${image}`,
-          thumbnail: `http://localhost:5000/${image}`,
+          original: image,
+          thumbnail: image,
         });
       });
     }
