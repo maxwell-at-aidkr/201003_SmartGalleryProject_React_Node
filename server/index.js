@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
-
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -31,7 +30,8 @@ app.use(cookieParser());
 
 // 노드 서버 내 정적 파일에 대한 라우트 설정
 // https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client
-app.use('/uploads', express.static('uploads'));
+// filepath가 /uploads/xxx.jpg로 설정된 이미지를 /uploads에서 찾아보도록 라우트 제공
+app.use('/uploads', express.static('./uploads'));
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/works', require('./routes/works'));
