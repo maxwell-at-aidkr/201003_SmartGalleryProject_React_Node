@@ -4,10 +4,10 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./client
-    container_name: smart_gallery_client
+    container_name: smart-gallery-app_client
     volumes:
-      - /smart_gallery/node_modules
-      - ./client:/smart_gallery
+      - /smart-gallery-app/node_modules
+      - ./client:/smart-gallery-app
     stdin_open: true
 
   nginx:
@@ -15,7 +15,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./nginx
-    container_name: smart_gallery_nginx
+    container_name: smart-gallery-app_nginx
     ports:
       - "3000:80"
 
@@ -23,7 +23,7 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./server
-    container_name: smart_gallery_server
+    container_name: smart-gallery-app_server
     volumes:
-      - /smart_gallery/node_modules
-      - ./server:/smart_gallery
+      - /smart-gallery-app/node_modules
+      - ./server:/smart-gallery-app

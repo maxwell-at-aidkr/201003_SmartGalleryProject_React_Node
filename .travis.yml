@@ -1,0 +1,36 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t gentlemj/smart-gallery-app -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true gentlemj/smart-gallery-app npm run test
+
+after_success:
+  - docker build -t gentlemj/smart-gallery-app-client ./client
+  - docker build -t gentlemj/smart-gallery-app-server ./server
+  - docker build -t gentlemj/smart-gallery-app-nginx ./nginx
+
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  - docker push gentlemj/smart-gallery-app-client
+  - docker push gentlemj/smart-gallery-app-server
+  - docker push gentlemj/smart-gallery-app-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-northeast-2"
+  app: "smart-gallery-app"
+  env: "SmartGalleryApp-env"
+  bucket_name: elasticbeanstalk-ap-northeast-2-739814456604
+  bucket_path: "smart-gallery-app"
+  on:
+    branch: master
+
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
