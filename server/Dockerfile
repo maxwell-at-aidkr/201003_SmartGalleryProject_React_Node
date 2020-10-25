@@ -1,6 +1,6 @@
 FROM node:alpine
 
-WORKDIR /smart_gallery
+WORKDIR /smart_gallery_app
 
 COPY ./package.json ./
 
