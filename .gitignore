@@ -1,8 +1,9 @@
-/node_modules
+node_modules
 /build
 
 uploads
 docker-compose.yml
+dev.js
 
 .DS_Store
 

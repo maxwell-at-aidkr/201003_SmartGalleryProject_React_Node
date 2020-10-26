@@ -30,7 +30,7 @@ function WorkInfo(props) {
       </Descriptions>
       <br />
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Button onClick={{ clickHandler }}>장바구니 담기</Button>
+        <Button onClick={clickHandler}>장바구니 담기</Button>
       </div>
     </div>
   );

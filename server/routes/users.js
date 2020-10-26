@@ -76,14 +76,15 @@ router.post('/addToCart', auth, (req, res) => {
     // 2. 가져온 정보에서 장바구니에 넣으려는 상품이 존재하는지 확인
     let duplicate = false;
     userInfo.cart.forEach((item) => {
-      if (item.id === req.body.productId) {
+      if (item.id === req.body.workId) {
         duplicate = true;
       }
     });
     // 2-1. 존재한다면
     if (duplicate) {
       User.findOneAndUpdate(
-        { _id: req.user._id, 'cart.id': req.body.productId },
+        // 특정 유저의 특정
+        { _id: req.user._id, 'cart.id': req.body.workId },
         { $inc: { 'cart.$.quantity': 1 } },
         { new: true },
         (err, userInfo) => {
@@ -99,7 +100,7 @@ router.post('/addToCart', auth, (req, res) => {
         {
           $push: {
             cart: {
-              id: req.body.productId,
+              id: req.body.workId,
               quantity: 1,
               date: Date.now(),
             },
