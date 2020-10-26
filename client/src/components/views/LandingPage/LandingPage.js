@@ -49,9 +49,6 @@ function LandingPage() {
       {/* Filter */}
       {/* Search */}
       <Row gutter={[16, 16]}>{renderCard}</Row>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button>더보기</button>
-      </div>
     </div>
   );
 }

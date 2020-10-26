@@ -1,7 +1,15 @@
 import React from "react";
-import { Descriptions } from "antd";
+import { useDispatch } from "react-redux";
+import { Button, Descriptions } from "antd";
+import { addToCart } from "../../../../_actions/user_actions";
 
 function WorkInfo(props) {
+  const dispatch = useDispatch();
+
+  const clickHandler = () => {
+    dispatch(addToCart(props.detail._id));
+  };
+
   return (
     <div>
       <br />
@@ -20,6 +28,10 @@ function WorkInfo(props) {
           {props.detail.description}
         </Descriptions.Item>
       </Descriptions>
+      <br />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Button onClick={{ clickHandler }}>장바구니 담기</Button>
+      </div>
     </div>
   );
 }

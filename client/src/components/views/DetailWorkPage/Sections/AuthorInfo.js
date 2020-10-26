@@ -17,6 +17,14 @@ function AuthorInfo(props) {
           padding: "5% 0 0 0",
         }}
       >
+        <Title level={4}>작가: {props.detail.author}</Title>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <img
           style={{
             width: "auto",
@@ -27,7 +35,6 @@ function AuthorInfo(props) {
           }}
           src={AuthorImage}
         />
-        <Title level={4}>작가: {props.detail.author}</Title>
       </div>
     </div>
   );
