@@ -29,9 +29,15 @@ const userSchema = mongoose.Schema({
     // 기본값으로 일반 사용자 지정
     default: 0,
   },
-  //
+  history: {
+    type: Array,
+    default: [],
+  },
+  cart: {
+    type: Array,
+    default: [],
+  },
   image: String,
-  //
   token: {
     type: String,
   },
