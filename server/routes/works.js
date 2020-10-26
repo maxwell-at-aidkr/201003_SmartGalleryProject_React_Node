@@ -6,7 +6,8 @@ const path = require('path');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath(__dirname + '/../config/awsconfig.json');
+
+// AWS.config.loadFromPath(__dirname + '/../config/awsconfig.json');
 
 //=================================
 //             Work
@@ -24,7 +25,11 @@ AWS.config.loadFromPath(__dirname + '/../config/awsconfig.json');
 // let upload = multer({ storage: storage });
 
 // AWS S3에 이미지 파일 저장하는 로직(multer-s3 활용)
-let s3 = new AWS.S3();
+const s3 = new AWS.S3({
+  accessKeyId: 'AKIAI5NRYPASNE5SD3FA', //노출주의
+  secretAccessKey: 'vZQFyRoY0Awnn9mSUDkXmeWSEjG/PkxaAExv+0n6', //노출주의
+  region: 'ap-northeast-2', //노출주의
+});
 
 let upload = multer({
   storage: multerS3({
