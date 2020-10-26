@@ -2,6 +2,7 @@
 /build
 
 uploads
+docker-compose.yml
 
 .DS_Store
 
