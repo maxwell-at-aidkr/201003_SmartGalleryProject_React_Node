@@ -26,9 +26,9 @@ const AWS = require('aws-sdk');
 
 // AWS S3에 이미지 파일 저장하는 로직(multer-s3 활용)
 const s3 = new AWS.S3({
-  accessKeyId: 'AKIAJC7OBGKWUCFKMEVQ', //노출주의
-  secretAccessKey: 'AX15PX01NxrJ6zK/aVbX7bVBzTyLKhIK2cHL4pWU', //노출주의
-  region: 'ap-northeast-2', //노출주의
+  accessKeyId: process.env.AWS_KEYID,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+  region: process.env.AWS_REGION,
 });
 
 let upload = multer({
