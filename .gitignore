@@ -4,6 +4,7 @@ node_modules
 uploads
 docker-compose.yml
 dev copy.js
+dev.js
 
 .DS_Store
 

@@ -5,7 +5,6 @@ const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 
 // auth(middleware)
-// TODO: auth 정의에서는 매개변수를 세 개 사용했는데??
 router.get('/auth', auth, (req, res) => {
   // auth에서 인증로직 통과 후 다음의 코드 실행
   res.status(200).json({
@@ -17,6 +16,8 @@ router.get('/auth', auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     image: req.user.image,
+    cart: req.user.cart,
+    history: req.user.history,
   });
 });
 
