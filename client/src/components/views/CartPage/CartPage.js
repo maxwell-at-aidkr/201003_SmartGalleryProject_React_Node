@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCartItems } from "../../../_actions/user_actions";
 import UserCardBlock from "./Sections/UserCardBlock";
-import Paypal from "../../utils/Paypal";
+import { Button } from "antd";
+
 function CartPage(props) {
   const dispatch = useDispatch();
   const [Total, setTotal] = useState(0);
@@ -34,11 +35,13 @@ function CartPage(props) {
 
     cartDetail.forEach((cart, index) => {
       totalPrice += cart.price * cart.quantity;
-      console.log("totalPrice", totalPrice);
     });
     setTotal(totalPrice);
   };
 
+  const onClickHandler = () => {
+    console.log("clickhandler", props.user.cartDetail);
+  };
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
       <h1>My Cart</h1>
@@ -46,7 +49,9 @@ function CartPage(props) {
       <div>
         <UserCardBlock works={props.user.cartDetail} />
         <h2>Total Amount: ${Total}</h2>
-        <Paypal total={Total} />
+        <Button type="primary" onClick={onClickHandler}>
+          결제하기
+        </Button>
       </div>
     </div>
   );
