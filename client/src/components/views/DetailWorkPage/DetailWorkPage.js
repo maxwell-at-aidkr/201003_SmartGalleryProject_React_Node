@@ -11,7 +11,7 @@ function DetailWorkPage(props) {
 
   useEffect(() => {
     axios
-      .get(`/api/works/work_by_id?id=${workId}&type=single`)
+      .get(`/api/works/works_by_id?id=${workId}&type=single`)
       .then((response) => {
         if (response.data.success) {
           console.log("response.data", response.data);

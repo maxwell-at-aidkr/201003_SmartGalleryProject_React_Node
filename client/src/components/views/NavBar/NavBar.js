@@ -7,10 +7,6 @@ import "./Sections/Navbar.css";
 function NavBar() {
   const [visible, setVisible] = useState(false);
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
   const onClose = () => {
     setVisible(false);
   };

@@ -71,9 +71,18 @@ export function getCartItems(cartItems, userCart) {
   const request = axios
     .get(`${WORK_SERVER}/works_by_id?id=${cartItems}&type=array`)
     .then((response) => {
-      console.log("response", response);
+      // Work Collection에서 CartItem 정보를 가져와서
+      // response.data.workDetailInfo 내 Quantity 필드를 추가해서 삽입
+      userCart.forEach((cartItem) => {
+        response.data.workDetailInfo.forEach((workDetail, index) => {
+          if (cartItem.id === workDetail._id) {
+            response.data.workDetailInfo[index].quantity = cartItem.quantity;
+          }
+        });
+      });
+      return response.data.workDetailInfo;
     });
-  console.log("getCartItems", request, userCart);
+
   return {
     type: GET_CART_ITEMS,
     payload: request,

@@ -1,6 +1,14 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
-.menu {
+/*스크롤바 없애기*/
+body {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+.menu box {
   padding: 0 20px;
   border-bottom: solid 1px #e8e8e8;
   overflow: auto;
