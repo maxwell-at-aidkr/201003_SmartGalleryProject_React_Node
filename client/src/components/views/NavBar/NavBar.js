@@ -20,9 +20,6 @@ function NavBar() {
       className="menu"
       style={{ position: "fixed", zIndex: 5, width: "100%" }}
     >
-      <div className="menu__logo">
-        <a href="/">Logo</a>
-      </div>
       <div className="menu__container">
         <div className="menu_left">
           <LeftMenu mode="horizontal" />
@@ -30,11 +27,6 @@ function NavBar() {
         <div className="menu_rigth">
           <RightMenu mode="horizontal" />
         </div>
-        <Button
-          className="menu__mobile-button"
-          type="primary"
-          onClick={showDrawer}
-        ></Button>
         <Drawer
           title="Basic Drawer"
           placement="right"

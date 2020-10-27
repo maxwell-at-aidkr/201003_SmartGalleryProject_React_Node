@@ -9,6 +9,7 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import UploadWorkPage from "./views/UploadWorkPage/UploadWorkPage";
 import DetailWorkPage from "./views/DetailWorkPage/DetailWorkPage";
+import CartPage from "./views/CartPage/CartPage.js";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -33,6 +34,7 @@ function App() {
             path="/work/:workId"
             component={Auth(DetailWorkPage, null)}
           />
+          <Route exact path="/user/cart" component={Auth(CartPage, true)} />
         </Switch>
       </div>
       <Footer />

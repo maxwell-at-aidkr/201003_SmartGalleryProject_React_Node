@@ -5,6 +5,13 @@ import axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  ShoppingCartOutlined,
+  UploadOutlined,
+  LogoutOutlined,
+  LoginOutlined,
+  UserAddOutlined,
+} from "@ant-design/icons";
 
 function RightMenu(props) {
   const user = useSelector((state) => state.user);
@@ -23,10 +30,14 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
-          <a href="/login">Signin</a>
+          <a href="/login">
+            <LoginOutlined style={{ fontSize: "25px", paddingTop: "10px" }} />
+          </a>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="/register">Signup</a>
+          <a href="/register">
+            <UserAddOutlined style={{ fontSize: "25px", paddingTop: "10px" }} />
+          </a>
         </Menu.Item>
       </Menu>
     );
@@ -35,10 +46,21 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="Upload">
-          <a href="/work/upload">Upload</a>
+          <a href="/work/upload">
+            <UploadOutlined style={{ fontSize: "25px", paddingTop: "10px" }} />
+          </a>
+        </Menu.Item>
+        <Menu.Item key="Cart">
+          <a href="/user/cart">
+            <ShoppingCartOutlined
+              style={{ fontSize: "25px", paddingTop: "10px" }}
+            />
+          </a>
         </Menu.Item>
         <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
+          <a onClick={logoutHandler}>
+            <LogoutOutlined style={{ fontSize: "25px", paddingTop: "10px" }} />
+          </a>
         </Menu.Item>
       </Menu>
     );
