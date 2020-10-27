@@ -8,7 +8,7 @@ body {
   display: none;
 }
 
-.menu box {
+.menu {
   padding: 0 20px;
   border-bottom: solid 1px #e8e8e8;
   overflow: auto;

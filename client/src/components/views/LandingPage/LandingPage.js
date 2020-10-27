@@ -22,7 +22,7 @@ function LandingPage() {
   const renderCard = Works.map((work, index) => {
     console.log(`work ${index}`, work);
     return (
-      <Col lg={6} md={8} xs={24} key={index}>
+      <Col lg={8} md={8} xs={24} key={index}>
         <Card
           key={index}
           cover={

@@ -21,9 +21,6 @@ function UserCardBlock(props) {
         </td>
         <td>{work.quantity} EA</td>
         <td>$ {work.price}</td>
-        <td>
-          <button>Remove</button>
-        </td>
       </tr>
     ));
 
@@ -35,7 +32,6 @@ function UserCardBlock(props) {
             <th>Work Image</th>
             <th>Work Quantity</th>
             <th>Work Price</th>
-            <th>Remove from Cart</th>
           </tr>
         </thead>
 
