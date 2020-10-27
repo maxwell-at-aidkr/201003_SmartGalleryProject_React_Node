@@ -46,7 +46,7 @@ function CartPage(props) {
       <div>
         <UserCardBlock works={props.user.cartDetail} />
         <h2>Total Amount: ${Total}</h2>
-        <Paypal />
+        <Paypal total={Total} />
       </div>
     </div>
   );
