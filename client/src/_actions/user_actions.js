@@ -5,8 +5,9 @@ import {
   AUTH_USER,
   LOGOUT_USER,
   ADD_TO_CART,
+  GET_CART_ITEMS,
 } from "./types";
-import { USER_SERVER } from "../components/Config.js";
+import { USER_SERVER, WORK_SERVER } from "../components/Config.js";
 
 export function registerUser(dataToSubmit) {
   const request = axios
@@ -62,6 +63,19 @@ export function addToCart(id) {
 
   return {
     type: ADD_TO_CART,
+    payload: request,
+  };
+}
+
+export function getCartItems(cartItems, userCart) {
+  const request = axios
+    .get(`${WORK_SERVER}/works_by_id?id=${cartItems}&type=array`)
+    .then((response) => {
+      console.log("response", response);
+    });
+  console.log("getCartItems", request, userCart);
+  return {
+    type: GET_CART_ITEMS,
     payload: request,
   };
 }

@@ -66,6 +66,7 @@ router.post('/uploadWork', (req, res) => {
 
 module.exports = router;
 
+// DB 내 모든 Works에 대해 response
 router.post('/getWorks', (req, res) => {
   GalleryWork.find().exec((err, workInfo) => {
     if (err) return res.status(400).send(err);
@@ -73,11 +74,18 @@ router.post('/getWorks', (req, res) => {
   });
 });
 
-router.get('/work_by_id', (req, res) => {
-  let workId = req.query.id;
+// work id를 조건으로 해당되는 Work에 대해 response
+router.get('/works_by_id', (req, res) => {
+  let workIds = req.query.id;
   let workType = req.query.type;
 
-  GalleryWork.find({ _id: workId })
+  if (workType === 'array') {
+    let ids = req.query.id.split(',');
+    workIds = ids.map((id) => {
+      return id;
+    });
+  }
+  GalleryWork.find({ _id: { $in: workIds } })
     .populate('writer')
     .exec((err, workDetailInfo) => {
       if (err) return res.status(400).json({ success: false });
