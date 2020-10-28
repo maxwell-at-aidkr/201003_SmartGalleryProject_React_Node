@@ -8,6 +8,7 @@ function WorkInfo(props) {
 
   const clickHandler = () => {
     dispatch(addToCart(props.detail._id));
+    alert("장바구니에 담겼습니다");
   };
 
   return (
