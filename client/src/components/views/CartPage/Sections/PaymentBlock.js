@@ -9,9 +9,7 @@ function PaymentBlock(props) {
 
   const onClickHandler = () => {
     console.log("clickhandler", props.cartDetail);
-    const paymentID = `${
-      parseInt(Date.now()) * parseInt(props.cartDetail.length)
-    }_${props.cartDetail[0]._id}`;
+    const paymentID = parseInt(Date.now()) * parseInt(props.cartDetail.length);
     dispatch(
       onSuccessBuy({
         cartDetail: props.cartDetail,

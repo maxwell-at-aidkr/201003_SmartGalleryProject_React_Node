@@ -127,7 +127,7 @@ router.post('/successBuy', auth, (req, res) => {
   req.body.cartDetail.forEach((item) => {
     paymentHistory.push({
       dateOfPurchase: Date.now(),
-      name: item.title,
+      title: item.title,
       id: item._id,
       price: item.price,
       quantity: item.quantity,

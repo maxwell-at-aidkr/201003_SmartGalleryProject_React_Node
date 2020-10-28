@@ -10,6 +10,7 @@ import {
   LogoutOutlined,
   LoginOutlined,
   UserAddOutlined,
+  HistoryOutlined,
 } from "@ant-design/icons";
 
 function RightMenu(props) {
@@ -54,6 +55,11 @@ function RightMenu(props) {
             <ShoppingCartOutlined
               style={{ fontSize: "25px", paddingTop: "10px" }}
             />
+          </a>
+        </Menu.Item>
+        <Menu.Item key="History">
+          <a href="/user/history">
+            <HistoryOutlined style={{ fontSize: "25px", paddingTop: "10px" }} />
           </a>
         </Menu.Item>
         <Menu.Item key="logout">
