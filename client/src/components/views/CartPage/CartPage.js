@@ -7,12 +7,14 @@ import PaymentBlock from "./Sections/PaymentBlock";
 function CartPage(props) {
   const dispatch = useDispatch();
   const [Total, setTotal] = useState(0);
+  const [ShowCart, setShowCart] = useState(false);
 
   useEffect(() => {
     let cartItems = [];
     // 1. 로그인한 유저의 카트 필드에 한개 이상의 데이터가 있다면
     if (props.user.userData && props.user.userData.cart) {
       if (props.user.userData.cart.length > 0) {
+        setShowCart(true);
         // 2. cartItems 배열에 각 카트 필드 내 work id 정보 삽입
         props.user.userData.cart.forEach((cartItem) => {
           cartItems.push(cartItem.id);
@@ -42,12 +44,17 @@ function CartPage(props) {
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
       <h1>My Cart</h1>
-
-      <div>
-        <UserCardBlock works={props.user.cartDetail} />
-        <h2>Total Amount: ${Total}</h2>
-        <PaymentBlock cartDetail={props.user.cartDetail} />
-      </div>
+      {ShowCart ? (
+        <div>
+          <UserCardBlock works={props.user.cartDetail} />
+          <h2>Total Amount: ${Total}</h2>
+          <PaymentBlock cartDetail={props.user.cartDetail} />
+        </div>
+      ) : (
+        <div>
+          <h2>장바구니가 비어있습니다.</h2>
+        </div>
+      )}
     </div>
   );
 }

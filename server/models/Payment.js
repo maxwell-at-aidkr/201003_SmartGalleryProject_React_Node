@@ -6,11 +6,7 @@ const paymentSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
-    data: {
-      type: Array,
-      default: [],
-    },
-    product: {
+    workDetail: {
       type: Array,
       default: [],
     },

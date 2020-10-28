@@ -92,6 +92,7 @@ export function getCartItems(cartItems, userCart) {
 
 export function onSuccessBuy(data) {
   console.log("redux_action call", data);
+
   const request = axios
     .post(`${USER_SERVER}/successBuy`, data)
     .then((response) => response.data);

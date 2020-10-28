@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-
+const async = require('async');
 const { User } = require('../models/User');
+const { Payment } = require('../models/Payment');
+const { GalleryWork } = require('../models/GalleryWork');
 const { auth } = require('../middleware/auth');
 
 // auth(middleware)
@@ -115,6 +117,60 @@ router.post('/addToCart', auth, (req, res) => {
       );
     }
   });
+});
+
+router.post('/successBuy', auth, (req, res) => {
+  // 1. User Collection 내 history 필드에 간단한 결제 정보 삽입
+  let paymentHistory = [];
+  let transactionData = {};
+
+  req.body.cartDetail.forEach((item) => {
+    paymentHistory.push({
+      dateOfPurchase: Date.now(),
+      name: item.title,
+      id: item._id,
+      price: item.price,
+      quantity: item.quantity,
+      paymentID: req.body.paymentID,
+    });
+  });
+
+  // 2. Payment Collection 안에 자세한 결제 정보 넣기
+  transactionData.user = {
+    id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  };
+
+  transactionData.workDetail = paymentHistory;
+
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    {
+      $push: { history: paymentHistory },
+      $set: { cart: [] },
+    },
+    { new: true },
+    (err, user) => {
+      if (err) return res.json({ success: false, err });
+      const payment = new Payment(transactionData);
+      payment.save((err, doc) => {
+        if (err) return res.json({ success: false, err });
+
+        // 3. GalleryWork Collection 내 sold 필드 정보 업데이트
+        // 3-1. 구매내역 내 모든 작품의 ID와 수량 정보를 soldWorks에 삽입
+        let soldWorks = [];
+        doc.workDetail.forEach((item) => {
+          soldWorks.push({ id: item.id, quantity: item.quantity });
+        });
+        // 3-2. 구매한 모든 작품에 대해 id를 기준으로 접근하여 sold 필드를 구매수량 만큼 증가
+        async.eachSeries(soldWorks, (item, callback) => {
+          GalleryWork.update({ _id: item.id }, { $inc: { sold: item.quantity } }, { new: false }, callback);
+        });
+        res.status(200).json({ success: true, cart: user.cart, cartDetail: [] });
+      });
+    }
+  );
 });
 
 module.exports = router;
