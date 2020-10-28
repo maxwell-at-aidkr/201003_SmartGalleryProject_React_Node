@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCartItems } from "../../../_actions/user_actions";
 import UserCardBlock from "./Sections/UserCardBlock";
-import { Button } from "antd";
+import PaymentBlock from "./Sections/PaymentBlock";
 
 function CartPage(props) {
   const dispatch = useDispatch();
@@ -39,9 +39,6 @@ function CartPage(props) {
     setTotal(totalPrice);
   };
 
-  const onClickHandler = () => {
-    console.log("clickhandler", props.user.cartDetail);
-  };
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
       <h1>My Cart</h1>
@@ -49,9 +46,7 @@ function CartPage(props) {
       <div>
         <UserCardBlock works={props.user.cartDetail} />
         <h2>Total Amount: ${Total}</h2>
-        <Button type="primary" onClick={onClickHandler}>
-          결제하기
-        </Button>
+        <PaymentBlock cartDetail={props.user.cartDetail} />
       </div>
     </div>
   );

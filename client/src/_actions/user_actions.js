@@ -6,6 +6,7 @@ import {
   LOGOUT_USER,
   ADD_TO_CART,
   GET_CART_ITEMS,
+  ON_SUCCESS_BUY,
 } from "./types";
 import { USER_SERVER, WORK_SERVER } from "../components/Config.js";
 
@@ -85,6 +86,18 @@ export function getCartItems(cartItems, userCart) {
 
   return {
     type: GET_CART_ITEMS,
+    payload: request,
+  };
+}
+
+export function onSuccessBuy(data) {
+  console.log("redux_action call", data);
+  const request = axios
+    .post(`${USER_SERVER}/successBuy`, data)
+    .then((response) => response.data);
+
+  return {
+    type: ON_SUCCESS_BUY,
     payload: request,
   };
 }
