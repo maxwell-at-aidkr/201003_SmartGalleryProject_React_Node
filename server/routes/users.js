@@ -5,6 +5,7 @@ const { User } = require('../models/User');
 const { Payment } = require('../models/Payment');
 const { GalleryWork } = require('../models/GalleryWork');
 const { auth } = require('../middleware/auth');
+const getDateNow = require('../utils/getDateNow.js');
 
 // auth(middleware)
 router.get('/auth', auth, (req, res) => {
@@ -124,9 +125,21 @@ router.post('/successBuy', auth, (req, res) => {
   let paymentHistory = [];
   let transactionData = {};
 
+  let date = new Date();
+  const nowDate =
+    date.getFullYear() +
+    '/' +
+    ('0' + (date.getMonth() + 1)).slice(-2) +
+    '/' +
+    ('0' + date.getDate()).slice(-2) +
+    '/' +
+    ('0' + date.getHours()).slice(-2) +
+    ':' +
+    ('0' + date.getMinutes()).slice(-2);
+
   req.body.cartDetail.forEach((item) => {
     paymentHistory.push({
-      dateOfPurchase: Date.now(),
+      dateOfPurchase: nowDate,
       title: item.title,
       id: item._id,
       price: item.price,
