@@ -4,6 +4,8 @@ import axios from "axios";
 import WorkInfo from "./Sections/WorkInfo";
 import WorkImage from "./Sections/WorkImage";
 import AuthorInfo from "./Sections/AuthorInfo";
+import { Typography } from "antd";
+const { Title } = Typography;
 
 function DetailWorkPage(props) {
   const [Work, setWork] = useState([]);
@@ -25,7 +27,7 @@ function DetailWorkPage(props) {
   return (
     <div style={{ width: "100%", padding: "3rem 4rem" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <h1>{Work.title}</h1>
+        <Title level={2}> {Work.title} </Title>
       </div>
       <Row>
         <Col lg={24} xs={24}>
