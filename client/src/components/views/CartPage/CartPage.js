@@ -42,7 +42,7 @@ function CartPage(props) {
   };
 
   return (
-    <div style={{ width: "85%", margin: "3rem auto" }}>
+    <div style={{ width: "85%", margin: "3rem auto", textAlign: "center" }}>
       <h1>My Cart</h1>
       {ShowCart ? (
         <div>
@@ -52,7 +52,7 @@ function CartPage(props) {
         </div>
       ) : (
         <div>
-          <h2>장바구니가 비어있습니다.</h2>
+          <h2>장바구니가 비어있습니다</h2>
         </div>
       )}
     </div>
