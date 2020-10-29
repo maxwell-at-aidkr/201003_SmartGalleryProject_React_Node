@@ -26,6 +26,7 @@ function LandingPage() {
           cover={
             <a href={`/work/${work._id}`}>
               <img
+                alt={"모든 작품 Redering"}
                 style={{ width: "100%", maxHeight: "150px" }}
                 src={work.WorkImages[0]}
               />

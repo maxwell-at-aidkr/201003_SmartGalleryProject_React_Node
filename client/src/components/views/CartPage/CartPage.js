@@ -21,16 +21,17 @@ function CartPage(props) {
         props.user.userData.cart.forEach((cartItem) => {
           cartItems.push(cartItem.id);
         });
-      }
 
-      // cart 내 qunatity 정보를 전달하기 위해 ~~.cart도 함께 전달
-      dispatch(getCartItems(cartItems, props.user.userData.cart)).then(
-        (response) => {
-          // State에 변화가 발생한 후의 값을 가지고 추가적인 작업을 할 때, 다음과 같이
-          // promise를 사용하여 비동기적으로 처리한다
-          calculateTotal(response.payload);
-        }
-      );
+        // cart 내 qunatity 정보를 전달하기 위해 ~~.cart도 함께 전달
+        dispatch(getCartItems(cartItems, props.user.userData.cart)).then(
+          (response) => {
+            console.log("getCartItems / response.payload", response.payload);
+            // State에 변화가 발생한 후의 값을 가지고 추가적인 작업을 할 때, 다음과 같이
+            // promise를 사용하여 비동기적으로 처리한다
+            calculateTotal(response.payload);
+          }
+        );
+      }
     }
   }, [props.user.userData]);
 

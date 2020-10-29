@@ -97,6 +97,8 @@ export function onSuccessBuy(data) {
     .post(`${USER_SERVER}/successBuy`, data)
     .then((response) => response.data);
 
+  console.log("get response", request);
+
   return {
     type: ON_SUCCESS_BUY,
     payload: request,

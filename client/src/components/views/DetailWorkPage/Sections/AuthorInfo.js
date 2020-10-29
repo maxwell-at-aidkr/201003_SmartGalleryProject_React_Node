@@ -26,6 +26,7 @@ function AuthorInfo(props) {
         }}
       >
         <img
+          alt={"작가 이미지"}
           style={{
             width: "auto",
             height: "auto",

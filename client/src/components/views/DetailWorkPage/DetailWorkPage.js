@@ -9,9 +9,9 @@ const { Title } = Typography;
 
 function DetailWorkPage(props) {
   const [Work, setWork] = useState([]);
-  const workId = props.match.params.workId;
 
   useEffect(() => {
+    const workId = props.match.params.workId;
     axios
       .get(`/api/works/works_by_id?id=${workId}&type=single`)
       .then((response) => {
