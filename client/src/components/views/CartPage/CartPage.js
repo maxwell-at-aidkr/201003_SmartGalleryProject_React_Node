@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { getCartItems } from "../../../_actions/user_actions";
 import UserCardBlock from "./Sections/UserCardBlock";
 import PaymentBlock from "./Sections/PaymentBlock";
+import { Typography } from "antd";
+const { Title } = Typography;
 
 function CartPage(props) {
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ function CartPage(props) {
 
   return (
     <div style={{ width: "85%", margin: "3rem auto", textAlign: "center" }}>
-      <h1>My Cart</h1>
+      <Title level={2}> 장바구니 </Title>
       {ShowCart ? (
         <div>
           <UserCardBlock works={props.user.cartDetail} />
