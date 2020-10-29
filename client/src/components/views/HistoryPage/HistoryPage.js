@@ -33,8 +33,8 @@ function HistoryPage(props) {
                 <tr key={item.id}>
                   <td>{item.dateOfPurchase}</td>
                   <td>{item.title}</td>
-                  <td>{item.quantity}</td>
-                  <td>{item.price}</td>
+                  <td>{item.quantity}개</td>
+                  <td>{item.price}만원</td>
                   <td>{item.paymentID}</td>
                 </tr>
               ))}

@@ -20,8 +20,8 @@ function UserCardBlock(props) {
             src={renderCartImage(work.WorkImages)}
           />
         </td>
-        <td>{work.quantity} EA</td>
-        <td>$ {work.price}</td>
+        <td>{work.quantity}개</td>
+        <td>{work.price}만원</td>
       </tr>
     ));
 
@@ -30,9 +30,9 @@ function UserCardBlock(props) {
       <table>
         <thead>
           <tr>
-            <th>Work Image</th>
-            <th>Work Quantity</th>
-            <th>Work Price</th>
+            <th>작품 이미지</th>
+            <th>구매 수량</th>
+            <th>가격</th>
           </tr>
         </thead>
 

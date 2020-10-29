@@ -49,7 +49,7 @@ function CartPage(props) {
       {ShowCart ? (
         <div>
           <UserCardBlock works={props.user.cartDetail} />
-          <h2>Total Amount: ${Total}</h2>
+          <h2>합계: {Total}만원</h2>
           <PaymentBlock cartDetail={props.user.cartDetail} />
         </div>
       ) : (

@@ -98,7 +98,7 @@ function UploadWorkPage(props) {
         <TextArea onChange={handleChangeDecsription} value={Description} />
         <br />
         <br />
-        <label>가격($)</label>
+        <label>가격(단위: 만원)</label>
         <Input type="number" onChange={handleChangePrice} value={Price} />
         <br />
         <br />

@@ -32,7 +32,7 @@ function LandingPage() {
             </a>
           }
         >
-          <Meta title={work.title} description={`$${work.price}`} />
+          <Meta title={work.title} description={`${work.price}만원`} />
         </Card>
       </Col>
     );

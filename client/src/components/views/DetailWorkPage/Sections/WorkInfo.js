@@ -16,11 +16,11 @@ function WorkInfo(props) {
       <br />
       <br />
       <Descriptions title="작품정보" bordered>
-        <Descriptions.Item label="가격($)">
-          {props.detail.price}
+        <Descriptions.Item label="가격">
+          {props.detail.price}만원
         </Descriptions.Item>
         <Descriptions.Item label="판매수">
-          {props.detail.sold}
+          {props.detail.sold}개
         </Descriptions.Item>
         <Descriptions.Item label="조회수">
           {props.detail.views}
