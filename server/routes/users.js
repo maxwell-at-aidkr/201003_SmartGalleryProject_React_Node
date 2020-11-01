@@ -5,7 +5,23 @@ const { User } = require('../models/User');
 const { Payment } = require('../models/Payment');
 const { GalleryWork } = require('../models/GalleryWork');
 const { auth } = require('../middleware/auth');
-const getDateNow = require('../utils/getDateNow.js');
+
+// 현재 연월일시간을 '연/월/일/시:분' 형식으로 변환
+const nowDate = () => {
+  let date = new Date();
+
+  return (
+    date.getFullYear() +
+    '/' +
+    ('0' + (date.getMonth() + 1)).slice(-2) +
+    '/' +
+    ('0' + date.getDate()).slice(-2) +
+    '/' +
+    ('0' + date.getHours()).slice(-2) +
+    ':' +
+    ('0' + date.getMinutes()).slice(-2)
+  );
+};
 
 // auth(middleware)
 router.get('/auth', auth, (req, res) => {
@@ -125,21 +141,9 @@ router.post('/successBuy', auth, (req, res) => {
   let paymentHistory = [];
   let transactionData = {};
 
-  let date = new Date();
-  const nowDate =
-    date.getFullYear() +
-    '/' +
-    ('0' + (date.getMonth() + 1)).slice(-2) +
-    '/' +
-    ('0' + date.getDate()).slice(-2) +
-    '/' +
-    ('0' + date.getHours()).slice(-2) +
-    ':' +
-    ('0' + date.getMinutes()).slice(-2);
-
   req.body.cartDetail.forEach((item) => {
     paymentHistory.push({
-      dateOfPurchase: nowDate,
+      dateOfPurchase: nowDate(),
       title: item.title,
       id: item._id,
       price: item.price,

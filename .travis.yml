@@ -28,7 +28,7 @@ deploy:
   region: "ap-northeast-2"
   app: "smart-gallery-app"
   env: "SmartGalleryApp-env"
-  bucket_name: elasticbeanstalk-ap-northeast-2-739814456604
+  bucket_name: elasticbeanstalk-ap-northeast-2-558889086763
   bucket_path: "smart-gallery-app"
   on:
     branch: master

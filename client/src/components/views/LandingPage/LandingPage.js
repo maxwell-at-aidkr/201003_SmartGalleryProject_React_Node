@@ -27,7 +27,7 @@ function LandingPage() {
             <a href={`/work/${work._id}`}>
               <img
                 alt={"모든 작품 Redering"}
-                style={{ width: "100%", maxHeight: "150px" }}
+                style={{ width: "100%", maxHeight: "120px" }}
                 src={work.WorkImages[0]}
               />
             </a>
