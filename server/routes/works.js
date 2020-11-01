@@ -38,7 +38,7 @@ let upload = multer({
     key: function (req, file, cb) {
       cb(null, `${Date.now()}_${file.originalname}`);
     },
-    acl: 'public-read-write',
+    acl: 'public-read',
   }),
 });
 
