@@ -34,17 +34,17 @@ const s3 = new AWS.S3({
 let upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'secondsmartgallerystorage',
+    bucket: 'thirdsmartgallerystorage',
     key: function (req, file, cb) {
       cb(null, `${Date.now()}_${file.originalname}`);
     },
-    acl: 'public-read',
+    acl: 'public-read-write',
   }),
 });
 
 router.post('/image', upload.single('file'), function (req, res, next) {
   let file = req.file;
-  let AWSfilePath = `https://secondsmartgallerystorage.s3.ap-northeast-2.amazonaws.com/${file.key}`;
+  let AWSfilePath = `https://thirdsmartgallerystorage.s3.ap-northeast-2.amazonaws.com/${file.key}`;
 
   let result = {
     success: true,
