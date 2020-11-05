@@ -44,7 +44,7 @@ let upload = multer({
 
 router.post('/image', upload.single('file'), function (req, res, next) {
   let file = req.file;
-  let AWSfilePath = `https://s3.ap-northeast-2.amazonaws.com/smartgallerystorage/${file.key}`;
+  let AWSfilePath = `https://smartgallerystorage.s3.ap-northeast-2.amazonaws.com/${file.key}`;
 
   let result = {
     success: true,
